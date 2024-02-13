@@ -6,7 +6,21 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var origins = builder.Configuration["AllowedCorsOrigins"]?.Split(";")
+                          ?? Array.Empty<string>();
+
+        builder.Services.AddCors(cors =>
+        {
+            cors.AddDefaultPolicy(policy =>
+            {
+                policy.WithOrigins(origins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         var app = builder.Build();
+        app.UseCors();
 
         var summaries = new[]
         {

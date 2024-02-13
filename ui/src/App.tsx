@@ -39,7 +39,7 @@ function App() {
         {forecast && (
           <div>
             <h2>Forecast</h2>
-            <pre>{JSON.stringify(forecast)}</pre>
+            <div>{JSON.stringify(forecast)}</div>
           </div>
         )}
         <p>
